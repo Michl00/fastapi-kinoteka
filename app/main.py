@@ -18,7 +18,7 @@ logging.basicConfig(format = config.log.format,
 
 logger.info('Logging started.')
 
-data = redis.Redis(host=config.db.host, port=config.db.port, db=0, decode_responses=True)
+data = redis.Redis(host=config.db.host, port=config.db.port, db=0, decode_responses=True, password=config.db.password)
 try:
     data.ping()
     logger.info('Подключение с Redis установлено.')
@@ -42,9 +42,9 @@ def redis_exception_handler(request: Request, exc: redis.ConnectionError):
 
 @app.get('/')
 def root():
-    return {'message': 'Это API-кинотека, для просмотра'
-            'вашего каталога перейдите на ~/catalog\n'
-            'Полную документацию можно найти на ~/docs'}
+    return {'message': 'Это API-кинотека, для просмотра '
+            'вашего каталога перейдите на ~/catalog. '
+            'Полную документацию можно найти на ~/docs.'}
 
 @app.get('/catalog/')
 def get_catalog():

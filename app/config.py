@@ -12,6 +12,7 @@ class Logger:
 class DBConfig:
     host: str
     port: int
+    password: str
 
 @dataclass
 class Config:
@@ -30,5 +31,6 @@ def load_config(path: str | None = None):
         db=DBConfig(
             host=env("DB_HOST"),
             port=env.int("DB_PORT"),
+            password=env("DB_PASS"),
         ),
     )
