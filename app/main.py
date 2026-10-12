@@ -18,7 +18,7 @@ logging.basicConfig(format = config.log.format,
 
 logger.info('Logging started.')
 
-data = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
+data = redis.Redis(host=config.db.host, port=config.db.port, db=0, decode_responses=True)
 try:
     data.ping()
     logger.info('Подключение с Redis установлено.')
