@@ -35,7 +35,7 @@ pip install -r requirements.txt
 ### 3. Запуск базы данных Redis (через Docker)
 Убедитесь, что у вас запущен Docker Desktop, и выполните:
 ```bash
-docker run --name kinoteka-redis -p 6379:6379 -d redis:latest
+docker run --name kinoteka-redis -p 6379:6379 -d redis:latest redis-server --appendonly yes --requirepass "password"
 ```
 
 ### 4. Запуск веб-сервера
