@@ -1,3 +1,66 @@
+# API-FilmCollection (FastAPI + Redis)
+
+Simple REST API app for creating personal film collection, made with **FastAPI** and **Redis** database for permanent data storage.
+
+## **Functions**
+* Add films to collection (validation by Pydantic).
+* View full colletion.
+* Find film by title.
+* Delete film from collection.
+* Global error handling when database is down.
+
+## **Technologies**
+* **Python 3.14**
+* **FastAPI** (Uvicorn as ASGI-сервер)
+* **Pydantic** (data validation)
+* **Redis** (main database in Docker-container)
+
+---
+
+## **Instruction for local deploy**
+
+### 1. Clone repositorie
+```bash
+git clone https://github.com/Michl00/fastapi-kinoteka.git
+cd fastapi-kinoteka
+```
+
+### 2. Venv setting
+```bash
+python -m venv .venv
+source .venv/Scripts/activate  # for Windows
+pip install -r requirements.txt
+```
+
+### 3. Starting Redis database (via Docker)
+Make sure that Docker Desktop is up and run:
+```bash
+docker run --name kinoteka-redis -p 6379:6379 -d redis:latest redis-server --appendonly yes --requirepass "password"
+```
+
+### 4. Starting web-server
+```bash
+uvicorn app.main:app --reload
+```
+Your app is available at: `http://127.0.0.1:8000`
+
+---
+
+## **Examples of API-endpoints**
+
+| Method | Endpoint | Discription |
+| :--- | :--- | :--- |
+| **GET** | `/` | Hello message API |
+| **GET** | `/catalog/` | Get the entire collection |
+| **GET** | `/catalog/{title}` | Find film by title |
+| **POST** | `/` | Add new film to collection |
+| **DELETE** | `/catalog/del/{title}` | Delete film from database |
+
+> **Interactive documentation:** The entire API specification and convenient panel for testing requests (Swagger UI) can be found at:
+`http://127.0.0.1:8000/docs`.
+
+---
+
 # API-Кинотека (FastAPI + Redis)
 
 Простое и быстрое REST API приложение для ведения персонального каталога фильмов, написанное на **FastAPI** с использованием высокопроизводительной базы данных **Redis** в качестве персистентного хранилища.
